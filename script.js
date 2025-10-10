@@ -1,6 +1,7 @@
-// --- 1. DATA ARRAY: Removed 'hoverText' for a compact look ---
+// --- 1. DATA ARRAY: Edit this array to update your links! ---
 const links = [
     // IMPORTANT: Replace the "YOUR_..." placeholder with your actual URLs
+    // Note: The 'hoverText' property is removed for the compact icon design
     { name: "YouTube", url: "YOUR_YOUTUBE_LINK", iconClass: "fab fa-youtube", class: "youtube" },
     { name: "Facebook", url: "YOUR_FACEBOOK_LINK", iconClass: "fab fa-facebook", class: "facebook" },
     { name: "Instagram", url: "YOUR_INSTAGRAM_LINK", iconClass: "fab fa-instagram", class: "instagram" },
@@ -22,11 +23,12 @@ const links = [
 ];
 
 
-// --- 2. DYNAMIC LINK RENDERING FUNCTION (Performance Improvement) ---
+// --- 2. DYNAMIC LINK RENDERING FUNCTION (Performance Optimization) ---
 function renderLinks() {
     const linksSection = document.querySelector('.links-section');
     linksSection.innerHTML = ''; 
 
+    // Performance enhancement: Use DocumentFragment for single DOM insertion
     const fragment = document.createDocumentFragment();
     
     links.forEach(link => {
@@ -35,14 +37,13 @@ function renderLinks() {
         a.target = "_blank"; 
         a.className = `link-button ${link.class}`;
         
-        // Include the name for accessibility, but hide it using CSS text-indent
+        // Includes the name for accessibility, but is hidden by CSS
         a.innerHTML = `<i class="${link.iconClass}" aria-hidden="true"></i> ${link.name}`; 
-        
-        // NOTE: The data-hover-text attribute is removed here
         
         fragment.appendChild(a);
     });
 
+    // Single append operation
     linksSection.appendChild(fragment);
 }
 
