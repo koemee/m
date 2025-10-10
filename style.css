@@ -1,18 +1,16 @@
-/* --- 1. CSS Variables for Day/Night Mode (Updated for Visibility) --- */
+/* --- 1. CSS Variables for Day/Night Mode --- */
 :root {
     /* Day Mode (Default) */
-    --text-color: #f0f2f5;      /* Light text for contrast against dark background overlay */
-    --card-color: rgba(255, 255, 255, 0.9); /* Card background is now a light, translucent accent */
-    --icon-background-day: rgba(255, 255, 255, 0.9); /* Near-white background for icons */
+    --text-color: #f0f2f5;      
+    --icon-background-day: rgba(255, 255, 255, 0.9); 
     --icon-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     --profile-border-color: #ffffff;
 }
 
 /* Night Mode Overrides */
 body.night-mode {
-    --text-color: #1a1a1a;      /* Dark text for contrast against light background overlay */
-    --card-color: rgba(0, 0, 0, 0.9);      /* Card background is now a dark, translucent accent */
-    --icon-background-night: rgba(0, 0, 0, 0.9); /* Near-black background for icons */
+    --text-color: #1a1a1a;      
+    --icon-background-night: rgba(0, 0, 0, 0.9);
     --icon-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
     --profile-border-color: #1a1a1a;
 }
@@ -23,13 +21,12 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    flex-direction: column; /* Center content vertically and horizontally */
-    justify-content-content: center;
+    flex-direction: column; 
+    justify-content: center;
     align-items: center;
     min-height: 100vh;
-    transition: all 0.5s; /* Smooth transition for any theme changes */
+    transition: all 0.5s; 
     
-    /* Ensure the background image is visible */
     background-size: cover;
     background-position: center;
     background-image: url('https://picsum.photos/1920/1080?random=1');
@@ -44,22 +41,16 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Subtle, low-opacity overlay to keep background visible */
     background: rgba(0, 0, 0, 0.2); 
     z-index: -1;
 }
-/* No separate background color variables needed, as the background is the image */
 
-
-/* --- 3. Container and Profile Styles (Removing Card Background) --- */
+/* --- 3. Container and Profile Styles (No background card) --- */
 .container {
     width: 90%;
     max-width: 600px;
-    padding: 20px 0; /* Padding around content, no padding on sides */
+    padding: 20px 0;
     text-align: center;
-    /* Removed: background-color: var(--card-color); */
-    border-radius: 15px;
-    /* Removed: box-shadow: var(--box-shadow); */
     transition: all 0.5s;
     position: relative; 
 }
@@ -74,7 +65,7 @@ body::before {
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 10px;
-    border: 4px solid var(--profile-border-color); /* Border changes with theme */
+    border: 4px solid var(--profile-border-color);
     box-shadow: var(--icon-shadow);
 }
 
@@ -82,8 +73,8 @@ h1 {
     margin-top: 5px;
     font-size: 2em;
     font-weight: 700;
-    color: var(--text-color); /* High contrast text */
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8); /* Shadow for visibility */
+    color: var(--text-color);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 p {
@@ -94,47 +85,44 @@ p {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 
-/* --- 4. Link Button Styles: Compact, Round Icons --- */
+/* --- 4. Link Button Styles: Compact, Round Icons (THE FINAL FIX) --- */
 .links-section {
     display: flex;
-    flex-wrap: wrap; /* Allows icons to wrap onto multiple lines if needed */
+    flex-wrap: wrap; 
     justify-content: center;
-    gap: 15px; /* Spacing between icon buttons */
+    gap: 15px; 
     margin-top: 20px;
     padding: 10px;
 }
 
 .link-button {
-    /* Square dimensions for a circle */
+    /* Dimensions and Shape */
     width: 55px; 
     height: 55px;
-    padding: 0; /* No padding needed */
-    
-    /* Make it a perfect circle */
     border-radius: 50%;
     
-    /* Positioning and display */
+    /* Layout and Positioning */
     display: flex; 
     align-items: center;
     justify-content: center;
+    position: relative; 
     
-    /* General styling */
+    /* FIX: Hiding the Text Label using a robust technique */
+    text-indent: 100%; 
+    white-space: nowrap;
+    overflow: hidden; 
+    
+    /* Visuals */
     text-decoration: none;
-    font-weight: 600;
-    font-size: 1.5em; /* Larger icon size */
     transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
     box-shadow: var(--icon-shadow);
     
-    /* Default background for day mode */
+    /* Background for visibility in both modes */
     background-color: var(--icon-background-day); 
     border: 1px solid rgba(255, 255, 255, 0.1); 
-    
-    /* Hide the text label since it's now just an icon */
-    line-height: 0; 
-    text-indent: -9999px; /* Hides text, only icon visible */
 }
 
-/* Night Mode Icon Background Override */
+/* Night Mode Icon Background Override (Ensures visibility) */
 body.night-mode .link-button {
     background-color: var(--icon-background-night);
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -142,55 +130,57 @@ body.night-mode .link-button {
 
 /* Hover Effect */
 .link-button:hover {
-    transform: scale(1.15); /* Pop out slightly more */
+    transform: scale(1.15); 
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
     opacity: 1; 
 }
 
-/* Icon Styles: Only the <i> element is styled */
+/* Icon Styles: Ensures the icon is visible and centered */
 .link-button i {
-    margin: 0; /* Remove previous margin */
-    font-size: 1em; /* Matches the button font size */
-    text-indent: 0; /* Ensures the icon itself is visible */
-    color: inherit; /* Icon color will be dictated by platform color */
+    /* FIX: Bring the icon back into view, centered, and sized correctly */
+    position: absolute; 
+    text-indent: 0; /* Ensures the icon itself is not pushed off screen */
+    font-size: 1.5em; 
+    color: inherit; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Perfect centering */
 }
 
 /* --- 5. Social Media Platform Colors (Icon Color Only) --- */
-/* We are only coloring the text/icon, NOT the button background */
-.facebook    { color: #1877F2 !important; }
-.instagram   { 
-    /* Use a central color for the icon instead of a gradient */
-    color: #C13584 !important; 
-}
-.youtube     { color: #FF0000 !important; }
-.twitter     { color: #1DA1F2 !important; }
-.tiktok      { color: #000000 !important; } /* Black on light background */
-body.night-mode .tiktok { color: #f0f2f5 !important; } /* White on dark background */
-.spotify     { color: #1DB954 !important; }
-.twitch      { color: #6441A5 !important; }
-.reddit      { color: #FF4500 !important; }
-.whatsapp    { color: #25D366 !important; }
-.telegram    { color: #229ED9 !important; }
-.snapchat    { color: #FFFC00 !important; }
-.pinterest   { color: #E60023 !important; }
-.discord     { color: #7289DA !important; }
-.quora       { color: #B92B27 !important; }
+/* We target the <i> element to set the color */
+.facebook i    { color: #1877F2 !important; }
+.instagram i   { color: #C13584 !important; } 
+.youtube i     { color: #FF0000 !important; }
+.twitter i     { color: #1DA1F2 !important; }
+/* Ensures visibility for black/white icons */
+.tiktok i      { color: #000000 !important; } 
+body.night-mode .tiktok i { color: #f0f2f5 !important; } 
+.spotify i     { color: #1DB954 !important; }
+.twitch i      { color: #6441A5 !important; }
+.reddit i      { color: #FF4500 !important; }
+.whatsapp i    { color: #25D366 !important; }
+.telegram i    { color: #229ED9 !important; }
+/* Snapchat uses yellow, which needs special consideration for text */
+.snapchat i    { color: #FFFC00 !important; } 
+.pinterest i   { color: #E60023 !important; }
+.discord i     { color: #7289DA !important; }
+.quora i       { color: #B92B27 !important; }
 
 /* Platforms without strong brand colors use the accent color */
-.audiomack, .bluesky, .signal, .threads {
+.audiomack i, .bluesky i, .signal i, .threads i {
     color: #0077b6 !important;
 }
-body.night-mode .audiomack, body.night-mode .bluesky, body.night-mode .signal, body.night-mode .threads {
+body.night-mode .audiomack i, body.night-mode .bluesky i, body.night-mode .signal i, body.night-mode .threads i {
      color: #4a90e2 !important;
 }
 
-/* --- 6. Mode Toggle Button Styles (Positioning) --- */
+/* --- 6. Mode Toggle Button Styles --- */
 #mode-toggle {
-    /* Adjusted position since there's no fixed card background */
     position: fixed; 
     top: 20px;
     right: 20px;
-    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+    background-color: rgba(255, 255, 255, 0.2); 
     border-radius: 50%;
     width: 40px;
     height: 40px;
