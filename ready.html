@@ -3,59 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
     <title>MSBUNDLE | Cheap Data Bundles</title>
-    
+
+    <meta property="og:type" content="website">
     <meta property="og:title" content="MSBUNDLE | Cheap Data Bundles">
     <meta property="og:description" content="📌 Buy Affordable Data Bundle with fastest delivery time">
-    <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Markmix-Studios/msbundle@refs/heads/main/msbundle.webp">
+    <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Markmix-Studios/msbundle@refs/heads/main/bundle.webp">
     <meta property="og:url" content="https://msbundle.store">
+    <meta name="twitter:card" content="summary_large_image">
 
     <style>
-        /* Reset margins and hide the main scrollbar to prevent "double scrolling" */
+        /* This makes the background match your store instantly */
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
             width: 100%;
-            overflow: hidden; 
-            background-color: #ffffff;
+            overflow: hidden;
+            background-color: #ffffff; /* Change this to your store's exact color */
         }
-
-        /* The Container: This fixes the "scroll trap" on iOS and Android */
         .iframe-container {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            /* This line is the "magic" for smooth iPhone scrolling */
-            -webkit-overflow-scrolling: touch; 
-            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
-
         iframe {
             width: 100%;
             height: 100%;
             border: none;
-            display: block;
-            /* Ensures no weird gaps at the bottom of the frame */
-            vertical-align: bottom; 
         }
     </style>
 </head>
 <body>
-
     <div class="iframe-container">
         <iframe 
             src="https://msbundle.citygh.com" 
-            title="MSBUNDLE Official Store"
-            loading="eager"
-            allow="payment; clipboard-write; camera; geolocation" 
-            sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts allow-downloads"
-            allowfullscreen>
+            importance="high"
+            allow="payment; clipboard-write">
         </iframe>
     </div>
-
 </body>
 </html>
